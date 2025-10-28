@@ -4,7 +4,7 @@ import "./shopUpdate.css";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-// import { BASEURL } from "../../../../BaseURL/BaseURL";
+import { BASEURL } from "../../../../BaseURL/BaseURL";
 import { toast } from "react-toastify";
 
 const ShopUpdate = () => {
@@ -81,7 +81,7 @@ const ShopUpdate = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/v1/product/${id}`);
+        const res = await axios.get(`${BASEURL}/api/v1/product/${id}`);
 
         setName(res.data.product.name);
         setDescription(res.data.product.description);
@@ -151,7 +151,7 @@ const ShopUpdate = () => {
         wireless,
         images
       };
-      await axios.put(`http://localhost:4000/api/v1/product/${id}/update`, newData);
+      await axios.put(`${BASEURL}/api/v1/product/${id}/update`, newData);
       toast.success("Product Updated Successfully");
       setImages([]);
       navigate(`/product/${id}`)
@@ -175,7 +175,7 @@ const ShopUpdate = () => {
         images
       };
 
-      await axios.put(`http://localhost:4000/api/v1/product/${id}/update/image`, newData);
+      await axios.put(`${BASEURL}/api/v1/product/${id}/update/image`, newData);
       toast.success("Product Images Updated Successfully");
       setImages([]);
       navigate(`/product/${id}`);

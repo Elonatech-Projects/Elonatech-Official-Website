@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Pagination from '../../../components/Pagination/Pagination'
-// import { BASEURL } from '../../../BaseURL/BaseURL'
+import { BASEURL } from '../../../BaseURL/BaseURL'
 import Loading from '../../../components/Loading/Loading'
 import axios from 'axios'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -27,7 +27,7 @@ const NetworkDevices = () => {
   const [defaultPriceRange, setDefaultPriceRange] = useState([0, 1000000])
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/v1/product/filter?category=Network`)
+    fetch(`${BASEURL}/api/v1/product/filter?category=Network`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {
@@ -97,7 +97,7 @@ const NetworkDevices = () => {
     }
 
     const queryString = queryParams.length > 0 ? queryParams.join('&') : ''
-    fetch(`http://localhost:4000/api/v1/product/filter?category=Network&${queryString}`)
+    fetch(`${BASEURL}/api/v1/product/filter?category=Network&${queryString}`)
       .then(response => response.json())
       .then(data => {
         setFilteredProducts(data.data)
@@ -138,7 +138,7 @@ const NetworkDevices = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/product/`)
+        const response = await axios.get(`${BASEURL}/api/v1/product/`)
         const filtered = response.data.getAllProducts.filter(
           user => user.category === 'Network'
         )

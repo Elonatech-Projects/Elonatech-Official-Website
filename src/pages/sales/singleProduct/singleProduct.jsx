@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-// import { BASEURL } from '../../../BaseURL/BaseURL'
+import { BASEURL } from '../../../BaseURL/BaseURL'
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import Loading from '../../../components/Loading/Loading'
 import DOMPurify from 'dompurify'
@@ -186,7 +186,7 @@ const SingleProduct = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/v1/product/${id}`)
+        const res = await axios.get(`${BASEURL}/api/v1/product/${id}`)
         setData(res.data.product)
         setImage(res.data.product.images)
         setCategory(res.data.product.category)
@@ -201,7 +201,7 @@ const SingleProduct = () => {
         // const nextRes = await axios.get(`${BASEURL}/api/v1/product/${res.data.product._id}/next`)
         // setNextProductId(nextRes.data.nextProduct._id)
 
-        const nextRes = await axios.get(`http://localhost:4000/api/v1/product/${res.data.product._id}/next`);
+        const nextRes = await axios.get(`${BASEURL}/api/v1/product/${res.data.product._id}/next`);
         if (nextRes.data.nextProduct) {
           setNextProductId(nextRes.data.nextProduct._id);
           setNextProductSlug(nextRes.data.nextProduct.slug);
@@ -226,7 +226,7 @@ const SingleProduct = () => {
   }, [id])
 
   const fetchAllProductsInCategory = () => {
-    fetch(`http://localhost:4000/api/v1/product/filter?category=${category}`)
+    fetch(`${BASEURL}/api/v1/product/filter?category=${category}`)
       .then(response => response.json())
       .then(data => {
         setAllProductsInCategory(data.data.reverse());
@@ -271,7 +271,7 @@ const SingleProduct = () => {
   const fetchRecentlyViewedProducts = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/api/v1/product/products/recently-viewed`
+        `${BASEURL}/api/v1/product/products/recently-viewed`
       )
       const recentlyViewedProducts = res.data.recentlyViewedProducts.slice(0, 6)
       setRecentlyViewed(
@@ -285,7 +285,7 @@ const SingleProduct = () => {
 
   const fetchRelatedProducts = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/api/v1/product/${id}/related`)
+      const res = await axios.get(`${BASEURL}/api/v1/product/${id}/related`)
       setRelatedProducts(res.data.relatedProducts)
     } catch (error) {
       console.error('Error fetching related products:', error)

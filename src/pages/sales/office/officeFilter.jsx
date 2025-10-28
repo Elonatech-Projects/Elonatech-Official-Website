@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Slider from '@mui/material/Slider'
-// import { BASEURL } from '../../../BaseURL/BaseURL'
+import { BASEURL } from '../../../BaseURL/BaseURL'
 import './office.css'
 
 const OfficeFilter = ({ setFilteredProducts }) => {
@@ -15,7 +15,7 @@ const OfficeFilter = ({ setFilteredProducts }) => {
   const [brands, setBrands] = useState([]) // Add state to hold brands
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/v1/product/filter?category=Office`)
+    fetch(`${BASEURL}/api/v1/product/filter?category=Office`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {
@@ -91,7 +91,7 @@ const OfficeFilter = ({ setFilteredProducts }) => {
     }
 
     const queryString = queryParams.length > 0 ? queryParams.join('&') : ''
-    fetch(`http://localhost:4000/api/v1/product/filter?category=Office&${queryString}`)
+    fetch(`${BASEURL}/api/v1/product/filter?category=Office&${queryString}`)
       .then(response => response.json())
       .then(data => {
         setFilteredProducts(data.data)

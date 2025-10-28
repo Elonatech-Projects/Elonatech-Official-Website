@@ -6,6 +6,7 @@ import axios from "axios";
 import "./computer.css";
 import { toast } from "react-toastify";
 import { AiOutlineDashboard } from "react-icons/ai";
+import { BASEURL } from '../../../BaseURL/BaseURL';
 
 const ComputerWrite = () => {
   const getInitialState = () => "Computer";
@@ -78,7 +79,7 @@ const ComputerWrite = () => {
       images.forEach((file) => formData.append("images", file));
 
       const response = await axios.post(
-        "http://localhost:4000/api/v1/product/create",
+        `${BASEURL}/api/v1/product/create`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

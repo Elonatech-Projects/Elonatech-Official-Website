@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios, { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { AiOutlineDashboard } from "react-icons/ai";
+import { BASEURL } from '../../../BaseURL/BaseURL'
 
 const ShopWrite = () => {
   const getInitialState = () => "Pos";
@@ -80,7 +81,7 @@ const ShopWrite = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/product/create`,
+        `${BASEURL}/api/v1/product/create`,
         formData
       );
 

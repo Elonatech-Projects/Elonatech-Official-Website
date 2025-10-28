@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-// import { BASEURL } from '../../../BaseURL/BaseURL'
+import { BASEURL } from '../../../BaseURL/BaseURL'
 import Slider from '@mui/material/Slider'
 import './shopFilter.css'
 import { GoDash } from 'react-icons/go'
@@ -17,7 +17,7 @@ const ShopFilter = ({ setFilteredProducts }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/api/v1/product/brand`)
+      .get(`${BASEURL}/api/v1/product/brand`)
       .then(response => {
         if (response.data.success) {
           const { brands: fetchedBrands, minPrice, maxPrice } = response.data
@@ -110,7 +110,7 @@ const ShopFilter = ({ setFilteredProducts }) => {
         params.maxPrice = price[1]
       }
 
-      const response = await axios.get(`http://localhost:4000/api/v1/product/filter/all`, {
+      const response = await axios.get(`${BASEURL}/api/v1/product/filter/all`, {
         params
       })
 

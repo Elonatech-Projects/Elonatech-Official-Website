@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
-// import { BASEURL } from '../../BaseURL/BaseURL'
+import { BASEURL } from '../../BaseURL/BaseURL'
 import axios from 'axios'
 import Serve from '../serve/serve'
 import Loading from '../../components/Loading/Loading'
@@ -41,7 +41,7 @@ const Main = () => {
     const fetchLatestProducts = async () => {
       setLoadingLatest(true)
       try {
-        const response = await axios.get(`http://localhost:4000/api/v1/product/filter/all`)
+        const response = await axios.get(`${BASEURL}/api/v1/product/filter/all`)
         if (response.data.success) {
           const allProducts = response.data.data
           console.log('All products:', allProducts)
@@ -109,7 +109,7 @@ const Main = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:4000/api/v1/email/consult`,
+        `${BASEURL}/api/v1/email/consult`,
         newData,
         { headers: { 'Content-Type': 'application/json' } }
       )
