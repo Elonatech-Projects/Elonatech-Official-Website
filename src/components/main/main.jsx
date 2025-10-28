@@ -1124,6 +1124,8 @@ const Main = () => {
                           ? 'POS'
                           : product.category === 'Network'
                           ? 'Network Device'
+                          : product.category === 'Shop'
+                          ? 'Shop'
                           : product.category}
                       </p>
                       <div className='stars mb-1' style={{ color: '#f6b01e' }}>
