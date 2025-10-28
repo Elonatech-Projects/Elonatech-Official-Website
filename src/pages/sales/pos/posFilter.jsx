@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Slider from '@mui/material/Slider'
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 import './pos.css'
 
 const PosFilter = ({ setFilteredProducts }) => {
@@ -14,7 +14,7 @@ const PosFilter = ({ setFilteredProducts }) => {
   const [availableBrands, setAvailableBrands] = useState([])
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/v1/product/filter?category=Pos`)
+    fetch(`http://localhost:4000/api/v1/product/filter?category=Pos`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {
@@ -87,7 +87,7 @@ const PosFilter = ({ setFilteredProducts }) => {
       queryParams.push(`maxPrice=${updatedFilters.price[1]}`)
     }
     const queryString = queryParams.length > 0 ? queryParams.join('&') : ''
-    fetch(`${BASEURL}/api/v1/product/filter?category=Pos&${queryString}`)
+    fetch(`http://localhost:4000/api/v1/product/filter?category=Pos&${queryString}`)
       .then(response => response.json())
       .then(data => {
         setFilteredProducts(data.data)

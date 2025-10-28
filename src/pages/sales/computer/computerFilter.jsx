@@ -1,7 +1,7 @@
 import "./computerFilter.css"; 
 import React, { useState, useEffect } from "react";
 import Slider from "@mui/material/Slider";
-import { BASEURL } from "../../../BaseURL/BaseURL";
+// import { BASEURL } from "../../../BaseURL/BaseURL";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -72,7 +72,7 @@ const ComputerFilter = ({ setFilteredProducts }) => {
   };
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/v1/product/filter?category=Computer`)
+    fetch(`http://localhost:4000/api/v1/product/filter?category=Computer`)
       .then((response) => response.json())
       .then((data) => {
         // Store all products for local filtering

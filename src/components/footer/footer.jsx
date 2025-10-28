@@ -13,9 +13,19 @@ const Footer = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const auth = JSON.parse(localStorage.getItem('token'))
-    setCurrentAdmin(auth)
-  }, [])
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      setCurrentAdmin(JSON.parse(token));
+    } catch (err) {
+      console.error("Invalid token JSON:", err);
+      setCurrentAdmin(null);
+    }
+  } else {
+    setCurrentAdmin(null);
+  }
+}, []);
+
 
   useEffect(() => {
     const loadFacebookSDK = () => {
@@ -560,29 +570,8 @@ const Footer = () => {
                   <li>
                     <Link to={'/motion-graphics'}>Motion Graphics</Link>
                   </li>
-                  {/* <li>
-                    <Link to={'/livestreaming'}>Livestreaming</Link>
-                  </li>
-                  <li>
-                    <Link to={'/network-support'}>Network Support</Link>
-                  </li>
-                  <li>
-                    <Link to={'/remote-support'}>Remote Support</Link>
-                  </li>
-                  <li>
-                    <Link to={'/retainer-partnership'}>Retainership</Link>
-                  </li>
-                  <li>
-                    <Link to={'/training'}>Training</Link>
-                  </li>
-                  <li>
-                    <Link to={'/consumables'}>Consumables</Link>
-                  </li> */}
+  
                 </ul>
-
-
-
-
 
                 <h4 className='mt-2 text-decoration-underline'>Products</h4>
                 <ul>

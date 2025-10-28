@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Slider from '@mui/material/Slider'
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 
 import './printers.css'
 
@@ -19,7 +19,7 @@ const PrinterFilter = ({ setFilteredProducts }) => {
 
   useEffect(() => {
     // Fetch product filters including available brands and price range
-    fetch(`${BASEURL}/api/v1/product/filter?category=Printer`)
+    fetch(`http://localhost:4000/api/v1/product/filter?category=Printer`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {
@@ -92,7 +92,7 @@ const PrinterFilter = ({ setFilteredProducts }) => {
       queryParams.push(`maxPrice=${updatedFilters.price[1]}`)
     }
     const queryString = queryParams.length > 0 ? queryParams.join('&') : ''
-    fetch(`${BASEURL}/api/v1/product/filter?category=Printer&${queryString}`)
+    fetch(`http://localhost:4000/api/v1/product/filter?category=Printer&${queryString}`)
       .then(response => response.json())
       .then(data => {
         setFilteredProducts(data.data)

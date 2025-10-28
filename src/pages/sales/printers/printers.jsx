@@ -39,7 +39,7 @@ const Printers = () => {
   }
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/v1/product/filter?category=Printer`)
+    fetch(`http://localhost:4000/api/v1/product/filter?category=Printer`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {

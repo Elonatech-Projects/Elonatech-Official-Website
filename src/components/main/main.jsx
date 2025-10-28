@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useEffect, useState } from 'react'
-import { BASEURL } from '../../BaseURL/BaseURL'
+// import { BASEURL } from '../../BaseURL/BaseURL'
 import axios from 'axios'
 import Serve from '../serve/serve'
 import Loading from '../../components/Loading/Loading'
@@ -17,12 +17,6 @@ import ElonatechOneStop from './captions/One_stop_IT_solution-min_lqmw0y.png'
 // others
 
 import MDImage from './captions/Ceo1.png'
-import CiscoRouter from './captions/cisco_router_lcjvrx.jpg'
-import HpImage from './captions/hp_rlucrk.jpg'
-import OfficePrinterImage from './captions/office-printer.jpg'
-import MacImage from './captions/macbook.png'
-import posImage from './captions/Pos.png'
-import OfficeScannerImage from './captions/office.png'
 
 import './main.css'
 
@@ -47,7 +41,7 @@ const Main = () => {
     const fetchLatestProducts = async () => {
       setLoadingLatest(true)
       try {
-        const response = await axios.get(`${BASEURL}/api/v1/product/filter/all`)
+        const response = await axios.get(`http://localhost:4000/api/v1/product/filter/all`)
         if (response.data.success) {
           const allProducts = response.data.data
           console.log('All products:', allProducts)
@@ -81,6 +75,16 @@ const Main = () => {
     fetchLatestProducts()
   }, [])
 
+  const handleProductClick = (product) => {
+    if (product && product.slug && product._id) {
+      navigate(`/product/${product.slug}/${product._id}`)
+    } else {
+      console.error('Product data is incomplete:', product)
+      toast.error('Product information is incomplete')
+    }
+  }
+
+
   const handleChangeCost = e => {
     const value = e.target.value.replace(/\D/g, '')
     setCost(value)
@@ -105,7 +109,7 @@ const Main = () => {
       }
 
       const response = await axios.post(
-        `${BASEURL}/api/v1/email/consult`,
+        `http://localhost:4000/api/v1/email/consult`,
         newData,
         { headers: { 'Content-Type': 'application/json' } }
       )
@@ -1020,136 +1024,135 @@ const Main = () => {
           margin: 'auto'
         }}
       ></div>
-      <div className='container-fluid mt-5'>
-        <div className='row mt-5 justify-content-center'>
-          {featuredProduct && (
-            <div className='col-2 px-1'>
-              <div
-                className='border shadow-sm p-2 mb-3 bg-body product-card rounded'
+          <div className='container-fluid mt-5'>
+            <div className='row mt-5 justify-content-center'>
+                    {featuredProduct && featuredProduct.images?.length > 0 ? (
+            <div className="col-2 px-1">
+              <div 
+                className="border shadow-sm p-2 mb-3 bg-body product-card rounded"
                 style={{
                   height: '350px',
                   display: 'flex',
-                  flexDirection: 'column'
+                  flexDirection: 'column',
+                  cursor: 'pointer'
                 }}
+                onClick={() => handleProductClick(featuredProduct)}
               >
-                <Link
-                  to={`/product/${featuredProduct.slug}`}
-                  className='text-decoration-none text-dark d-flex flex-column h-100'
-                >
-                  <div
-                    className='text-center'
-                    style={{ height: '150px', overflow: 'hidden' }}
-                  >
+                <div className="text-decoration-none text-dark d-flex flex-column h-100">
+                  <div className="text-center" style={{ height: '150px', overflow: 'hidden' }}>
                     <LazyLoadImage
-                      src={featuredProduct.images[0]?.url}
-                      placeholderSrc='https://res.cloudinary.com/elonatech/image/upload/v1710503902/loaderImage/blurred_Loader_ufozvn.png'
-                      className='lazyload img-fluid'
-                      alt={featuredProduct.name}
-                      width='150'
-                      height='150'
+                      src={featuredProduct.images[0]?.url || '/fallback.jpg'}
+                      placeholderSrc="https://res.cloudinary.com/elonatech/image/upload/v1710503902/loaderImage/blurred_Loader_ufozvn.png"
+                      className="lazyload img-fluid"
+                      alt={featuredProduct.name || 'Product image'}
+                      width="150"
+                      height="150"
+                      style={{ objectFit: 'contain', maxHeight: '150px' }}
                     />
                   </div>
-                  <h5
-                    className='fw-normal mt-2 text-truncate'
-                    title={featuredProduct.name}
-                  >
+                  <h5 className="fw-normal mt-2 text-truncate" title={featuredProduct.name}>
                     {featuredProduct.name}
                   </h5>
-                  <p className='small mb-1'>Shop</p>
-                  <div className='stars mb-1' style={{ color: '#f6b01e' }}>
-                    <i className='bi bi-star-fill'></i>
-                    <i className='bi bi-star-fill'></i>
-                    <i className='bi bi-star-fill'></i>
-                    <i className='bi bi-star-fill'></i>
-                    <i className='bi bi-star-fill'></i>
+                  <p className="small mb-1">Featured Product</p>
+                  <div className="stars mb-1" style={{ color: '#f6b01e' }}>
+                    {[...Array(5)].map((_, i) => (
+                      <i key={i} className="bi bi-star-fill"></i>
+                    ))}
                   </div>
-                  <div className='d-flex justify-content-between align-items-center mb-2'>
-                    <p className='m-0 text-danger small'>
-                      ₦{featuredProduct.price.toLocaleString()}
-                    </p>{' '}
-                    {/* Format price */}
-                    <i className='bi bi-cart' style={{ fontSize: '18px' }}></i>
+                  <div className="d-flex justify-content-between align-items-center mb-2">
+                    <p className="m-0 text-danger small">
+                      ₦{featuredProduct.price?.toLocaleString() || '0'}
+                    </p>
+                    <i className="bi bi-cart" style={{ fontSize: '18px' }}></i>
                   </div>
-                  <div className='mt-auto'>
-                    <button className='btn btn-sm btn-dark w-100 rounded-pill'>
+                  <div className="mt-auto">
+                    <button className="btn btn-sm btn-dark w-100 rounded-pill">
                       View More
                     </button>
                   </div>
-                </Link>
-              </div>
-            </div>
-          )}
-          {loadingLatest ? (
-            <Loading />
-          ) : (
-            latestProducts.map(product => (
-              <div key={product._id} className='col-2 px-1'>
-                <div
-                  className='border shadow-sm p-2 mb-3 bg-body product-card rounded'
-                  style={{
-                    height: '350px',
-                    display: 'flex',
-                    flexDirection: 'column'
-                  }}
-                >
-                  <Link
-                    to={`/product/${product.slug}`}
-                    className='text-decoration-none text-dark d-flex flex-column h-100'
-                  >
-                    <div
-                      className='text-center'
-                      style={{ height: '150px', overflow: 'hidden' }}
-                    >
-                      <LazyLoadImage
-                        src={product.images[0]?.url}
-                        placeholderSrc='https://res.cloudinary.com/elonatech/image/upload/v1710503902/loaderImage/blurred_Loader_ufozvn.png'
-                        className='lazyload img-fluid'
-                        alt={product.name}
-                        width='150'
-                        height='150'
-                      />
-                    </div>
-                    <h5
-                      className='fw-normal mt-2 text-truncate'
-                      title={product.name}
-                    >
-                      {product.name}
-                    </h5>
-                    <p className='fs-6'>
-                      {product.category === 'Office'
-                        ? 'Office Equipment'
-                        : product.category === 'Pos'
-                        ? 'POS'
-                        : product.category === 'Network'
-                        ? 'Network Device'
-                        : product.category}
-                    </p>{' '}
-                    {/* Display category */}
-                    <div className='stars mb-1' style={{ color: '#f6b01e' }}>
-                      <i className='bi bi-star-fill'></i>
-                      <i className='bi bi-star-fill'></i>
-                      <i className='bi bi-star-fill'></i>
-                      <i className='bi bi-star-fill'></i>
-                      <i className='bi bi-star-fill'></i>
-                    </div>
-                    <div className='d-flex justify-content-between align-items-center mb-2'>
-                      <p className='m-0 text-danger small'>
-                        ₦{product.price.toLocaleString()}
-                      </p>{' '}
-                      {/* Format price */}
-                      <i
-                        className='bi bi-cart'
-                        style={{ fontSize: '18px' }}
-                      ></i>
-                    </div>
-                    <div className='mt-auto'>
-                      <button className='btn btn-sm btn-dark w-100 rounded-pill'>
-                        View More
-                      </button>
-                    </div>
-                  </Link>
                 </div>
               </div>
+            </div>
+          ) : (
+            !loadingLatest && (
+              <div className="col-12 text-center">
+                <p>No featured product available</p>
+              </div>
+            )
+          )}
+           {loadingLatest ? (
+            <Loading />
+          ) : (
+            latestProducts.slice().map(product => (
+              product && product._id && product.slug ? (
+                <div key={product._id} className='col-2 px-1'>
+                  <div
+                    className='border shadow-sm p-2 mb-3 bg-body product-card rounded'
+                    style={{
+                      height: '350px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => handleProductClick(product)}
+                  >
+                    <div className='text-decoration-none text-dark d-flex flex-column h-100'>
+                      <div
+                        className='text-center'
+                        style={{ height: '150px', overflow: 'hidden' }}
+                      >
+                        <LazyLoadImage
+                          src={product.images?.[0]?.url || '/fallback.jpg'}
+                          placeholderSrc='https://res.cloudinary.com/elonatech/image/upload/v1710503902/loaderImage/blurred_Loader_ufozvn.png'
+                          className='lazyload img-fluid'
+                          alt={product.name}
+                          width='150'
+                          height='150'
+                          style={{ objectFit: 'contain', maxHeight: '150px' }}
+                        />
+                      </div>
+                      <h5
+                        className='fw-normal mt-2 text-truncate'
+                        title={product.name}
+                      >
+                        {product.name}
+                      </h5>
+                      <p className='fs-6'>
+                        {product.category === 'Office'
+                          ? 'Office Equipment'
+                          : product.category === 'Pos'
+                          ? 'POS'
+                          : product.category === 'Network'
+                          ? 'Network Device'
+                          : product.category === 'Shop'
+                          ? 'Shop'
+                          : product.category}
+                      </p>
+                      <div className='stars mb-1' style={{ color: '#f6b01e' }}>
+                        <i className='bi bi-star-fill'></i>
+                        <i className='bi bi-star-fill'></i>
+                        <i className='bi bi-star-fill'></i>
+                        <i className='bi bi-star-fill'></i>
+                        <i className='bi bi-star-fill'></i>
+                      </div>
+                      <div className='d-flex justify-content-between align-items-center mb-2'>
+                        <p className='m-0 text-danger small'>
+                          ₦{product.price?.toLocaleString() || '0'}
+                        </p>
+                        <i
+                          className='bi bi-cart'
+                          style={{ fontSize: '18px' }}
+                        ></i>
+                      </div>
+                      <div className='mt-auto'>
+                        <button className='btn btn-sm btn-dark w-100 rounded-pill'>
+                          View More
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : null
             ))
           )}
         </div>

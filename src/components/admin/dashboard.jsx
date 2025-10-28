@@ -53,7 +53,7 @@ const Dashboard = () => {
             try {
                 const currentYear = new Date().getFullYear();
     
-                const response = await axios.get(`${BASEURL}/api/v1/visitors/monthly?year=${currentYear}`);
+                const response = await axios.get(`http://localhost:4000/api/v1/visitors/monthly?year=${currentYear}`);
 
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
