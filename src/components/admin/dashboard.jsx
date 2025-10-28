@@ -6,7 +6,7 @@ import { useState, useEffect, React } from 'react';
 import { FiArchive } from "react-icons/fi";
 import './dashboard.css'
 import { AiOutlineDashboard } from 'react-icons/ai';
-import { BASEURL } from "../../BaseURL/BaseURL";
+// import { BASEURL } from "../../BaseURL/BaseURL";
 
 const Dashboard = () => {
     const [visitorData, setVisitorData] = useState([]);
@@ -53,7 +53,7 @@ const Dashboard = () => {
             try {
                 const currentYear = new Date().getFullYear();
     
-                const response = await axios.get(`http://localhost:4000/api/v1/visitors/monthly?year=${currentYear}`);
+                const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/visitors/monthly?year=${currentYear}`);
 
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     

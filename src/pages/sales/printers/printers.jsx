@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Pagination from '../../../components/Pagination/Pagination'
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 import Loading from '../../../components/Loading/Loading'
 import axios from 'axios'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -39,7 +39,7 @@ const Printers = () => {
   }
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/v1/product/filter?category=Printer`)
+    fetch(`https://backend-api-mbln.onrender.com/api/v1/product/filter?category=Printer`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {
@@ -111,7 +111,7 @@ const Printers = () => {
       queryParams.push(`maxPrice=${updatedFilters.price[1]}`)
     }
     const queryString = queryParams.length > 0 ? queryParams.join('&') : ''
-    fetch(`${BASEURL}/api/v1/product/filter?category=Printer&${queryString}`)
+    fetch(`https://backend-api-mbln.onrender.com/api/v1/product/filter?category=Printer&${queryString}`)
       .then(response => response.json())
       .then(data => {
         setFilteredProducts(data.data)
@@ -136,7 +136,7 @@ const Printers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASEURL}/api/v1/product/`)
+        const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/`)
         const filtered = response.data.getAllProducts.filter(
           user => user.category === 'Printer'
         )

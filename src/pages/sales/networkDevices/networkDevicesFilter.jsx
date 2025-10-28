@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Slider from '@mui/material/Slider'
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 import '../printers/printers.css'
 
 const NetworkFilter = ({ setFilteredProducts }) => {
@@ -16,7 +16,7 @@ const NetworkFilter = ({ setFilteredProducts }) => {
   const [defaultPriceRange, setDefaultPriceRange] = useState([0, 1000000])
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/v1/product/filter?category=Network`)
+    fetch(`https://backend-api-mbln.onrender.com/api/v1/product/filter?category=Network`)
       .then(response => response.json())
       .then(data => {
         if (data.minPrice !== undefined && data.maxPrice !== undefined) {
@@ -92,7 +92,7 @@ const NetworkFilter = ({ setFilteredProducts }) => {
     }
 
     const queryString = queryParams.length > 0 ? queryParams.join('&') : ''
-    fetch(`${BASEURL}/api/v1/product/filter?category=Network&${queryString}`)
+    fetch(`https://backend-api-mbln.onrender.com/api/v1/product/filter?category=Network&${queryString}`)
       .then(response => response.json())
       .then(data => {
         setFilteredProducts(data.data)

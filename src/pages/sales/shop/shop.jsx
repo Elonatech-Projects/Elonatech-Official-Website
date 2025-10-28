@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Pagination from './../../../components/Pagination/Pagination'
 import './shop.css'
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 import Loading from '../../../components/Loading/Loading'
 import axios from 'axios'
 import {
@@ -45,7 +45,7 @@ const Shop = () => {
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.get(`${BASEURL}/api/v1/product/filter/all`)
+        const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/filter/all`)
         const products = response.data.data.reverse()
         console.log(products)
         setData(products)
@@ -172,7 +172,7 @@ const Shop = () => {
 
   useEffect(() => {
     axios
-      .get(`${BASEURL}/api/v1/product/brand`)
+      .get(`https://backend-api-mbln.onrender.com/api/v1/product/brand`)
       .then(response => {
         if (response.data.success) {
           const { brands: fetchedBrands, minPrice, maxPrice } = response.data
@@ -261,7 +261,7 @@ const Shop = () => {
         params.maxPrice = price[1]
       }
 
-      const response = await axios.get(`${BASEURL}/api/v1/product/filter/all`, {
+      const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/filter/all`, {
         params
       })
 

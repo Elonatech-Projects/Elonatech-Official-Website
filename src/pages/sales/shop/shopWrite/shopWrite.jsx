@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios, { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 
 const ShopWrite = () => {
   const getInitialState = () => "Pos";
@@ -81,7 +81,7 @@ const ShopWrite = () => {
       }
 
       const response = await axios.post(
-        `${BASEURL}/api/v1/product/create`,
+        `https://backend-api-mbln.onrender.com/api/v1/product/create`,
         formData
       );
 

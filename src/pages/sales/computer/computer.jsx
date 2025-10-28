@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Pagination from './../../../components/Pagination/Pagination'
-import { BASEURL } from '../../../BaseURL/BaseURL'
+// import { BASEURL } from '../../../BaseURL/BaseURL'
 import Loading from '../../../components/Loading/Loading'
 import axios from 'axios'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -74,7 +74,7 @@ const Computer = () => {
   }
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/v1/product/filter?category=Computer`)
+    fetch(`https://backend-api-mbln.onrender.com/api/v1/product/filter?category=Computer`)
       .then(response => response.json())
       .then(data => {
         setAllProducts(data.data.reverse())
@@ -268,7 +268,7 @@ const Computer = () => {
     const fetchData = async () => {
       setIsLoading(true)
       try {
-        const response = await axios.get(`${BASEURL}/api/v1/product/`)
+        const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/`)
         const filtered = response.data.getAllProducts.filter(
           user => user.category === 'Computer'
         )

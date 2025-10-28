@@ -41,7 +41,7 @@ const Main = () => {
     const fetchLatestProducts = async () => {
       setLoadingLatest(true)
       try {
-        const response = await axios.get(`${BASEURL}/api/v1/product/filter/all`)
+        const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/filter/all`)
         if (response.data.success) {
           const allProducts = response.data.data
           console.log('All products:', allProducts)
@@ -109,7 +109,7 @@ const Main = () => {
       }
 
       const response = await axios.post(
-        `${BASEURL}/api/v1/email/consult`,
+        `https://backend-api-mbln.onrender.com/api/v1/email/consult`,
         newData,
         { headers: { 'Content-Type': 'application/json' } }
       )

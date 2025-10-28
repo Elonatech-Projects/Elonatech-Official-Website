@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { BASEURL } from '../../BaseURL/BaseURL'
+// import { BASEURL } from '../../BaseURL/BaseURL'
 import './blogDetails.css'
 import Loading from '../Loading/Loading'
 import DOMPurify from 'dompurify'
@@ -29,7 +29,7 @@ const BlogRelated = () => {
         email
       }
       const mail = await axios.post(
-        `${BASEURL}/api/v1/email/mailchimp`,
+        `https://backend-api-mbln.onrender.com/api/v1/email/mailchimp`,
         newData,
         { headers: { 'Content-Type': 'Application/json' } }
       )
@@ -49,7 +49,7 @@ const BlogRelated = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`${BASEURL}/api/v1/blog/${id}`)
+        const res = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/blog/${id}`)
         setData(res.data)
         setIsLoading(true)
         setId(res.data._id);
