@@ -1026,7 +1026,7 @@ const Main = () => {
       ></div>
           <div className='container-fluid mt-5'>
             <div className='row mt-5 justify-content-center'>
-                    {featuredProduct && featuredProduct.images?.length > 0 ? (
+               {featuredProduct && featuredProduct.images?.length > 0 ? (
             <div className="col-2 px-1">
               <div 
                 className="border shadow-sm p-2 mb-3 bg-body product-card rounded"
@@ -1053,7 +1053,7 @@ const Main = () => {
                   <h5 className="fw-normal mt-2 text-truncate" title={featuredProduct.name}>
                     {featuredProduct.name}
                   </h5>
-                  <p className="small mb-1">Featured Product</p>
+                  {/* <p className="small mb-1">Featured Product</p> */}
                   <div className="stars mb-1" style={{ color: '#f6b01e' }}>
                     {[...Array(5)].map((_, i) => (
                       <i key={i} className="bi bi-star-fill"></i>
@@ -1124,8 +1124,6 @@ const Main = () => {
                           ? 'POS'
                           : product.category === 'Network'
                           ? 'Network Device'
-                          : product.category === 'Shop'
-                          ? 'Shop'
                           : product.category}
                       </p>
                       <div className='stars mb-1' style={{ color: '#f6b01e' }}>
