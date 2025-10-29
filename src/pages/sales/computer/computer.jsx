@@ -517,7 +517,7 @@ const Computer = () => {
                 <ul className='list-unstyled'>
                   <li>
                     <Link
-                      to={'/shop'}
+                      to={'/products'}
                       className='text-dark'
                       style={{ textDecoration: 'none' }}
                       onMouseEnter={e =>

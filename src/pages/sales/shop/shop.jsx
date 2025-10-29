@@ -451,7 +451,7 @@ const Shop = () => {
                 <ul className='list-unstyled'>
                   <li>
                     <Link
-                      to={'/shop'}
+                      to={'/products'}
                       className={`item ${
                         activeItem === 'Item 1' ? 'active-category' : ''
                       }`}
