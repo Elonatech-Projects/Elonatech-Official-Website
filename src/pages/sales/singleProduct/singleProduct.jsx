@@ -2,7 +2,6 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-// import { BASEURL } from '../../../BaseURL/BaseURL'
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import Loading from '../../../components/Loading/Loading'
 import DOMPurify from 'dompurify'
@@ -54,10 +53,6 @@ const useWindowSize = () => {
   return windowSize
 }
 
-
-// git remote add origin https://github.com/Elonatech/Elonatech-Official-Website.git
-
-
 const SingleProduct = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState()
   const [data, setData] = useState({})
@@ -82,23 +77,13 @@ const SingleProduct = () => {
   const windowSize = useWindowSize() 
   const isMobile = windowSize.width < 768
 
-
   let currentProductCat;
   
   const useScrollResetNavigation = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const isNavigatingRef = useRef(false)
-    const [previousUrl, setPreviousUrl] = useState(null)
-  
-    useEffect(() => {
-      setPreviousUrl(window.location.href)
-    }, [location])
 
-    useEffect(() => {
-      setProductUrl(window.location.href)
-    }, [])
-  
     const scrollToTop = useCallback(() => {
       window.scrollTo({
         top: 0,
@@ -128,11 +113,6 @@ const SingleProduct = () => {
       }
     }
   
-    const handleGoToShop = () => {
-      navigate('/shop')
-      scrollToTop()
-    }
-  
     const handleNavigateNext = useCallback(() => {
       if (!isNavigatingRef.current && nextProductId && nextProductSlug) {
         isNavigatingRef.current = true;
@@ -143,7 +123,7 @@ const SingleProduct = () => {
       }
     }, [nextProductId, nextProductSlug, navigate, isNavigatingRef]);
   
-    return { previousUrl, handleGoBack, scrollToTop, handleNavigateNext, handleGoToShop }
+    return { handleGoBack, scrollToTop, handleNavigateNext }
   }
   
 
@@ -167,21 +147,32 @@ const SingleProduct = () => {
       currentProductCat = category.toLowerCase();
   }
 
-
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem('token'))
     setCurrentAdmin(auth)
   }, [])
 
-  const { handleGoBack, handleNavigateNext} = useScrollResetNavigation()
+  const { handleGoBack, handleNavigateNext } = useScrollResetNavigation()
 
-  const [previousUrl, setPreviousUrl] = useState(null)
-
-  useEffect(() => {
-    setPreviousUrl(document.referrer || localStorage.getItem('previousUrl') || '/shop')
-    localStorage.setItem('previousUrl', 'yegduyewgduwdiuwduw', window.location.href)
-  }, [])
-
+  // Simple back navigation to recent page
+  const handleGoToShop = () => {
+    // Priority 1: Use the from state passed via React Router
+    if (location.state?.from) {
+      navigate(location.state.from);
+    } 
+    // Priority 2: Use localStorage fallback
+    else if (localStorage.getItem('lastFrom')) {
+      navigate(localStorage.getItem('lastFrom'));
+    }
+    // Priority 3: Fallback to category-based navigation
+    else {
+      const pageNumber = calculatePageNumber();
+      navigate(`/${currentProductCat}?page=${pageNumber}`);
+    }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -196,11 +187,6 @@ const SingleProduct = () => {
 
         updateRecentlyViewedInLocalStorage()
 
-
-        // Fetch next product
-        // const nextRes = await axios.get(`${BASEURL}/api/v1/product/${res.data.product._id}/next`)
-        // setNextProductId(nextRes.data.nextProduct._id)
-
         const nextRes = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/${res.data.product._id}/next`);
         if (nextRes.data.nextProduct) {
           setNextProductId(nextRes.data.nextProduct._id);
@@ -212,9 +198,7 @@ const SingleProduct = () => {
 
         await fetchAllProductsInCategory()
         console.log('allProductsInCategory:', allProductsInCategory);
-        // Fetch related products
         await fetchRelatedProducts()
-
         await fetchRecentlyViewedProducts()
 
       } catch (error) {
@@ -243,12 +227,6 @@ const SingleProduct = () => {
       return Math.floor((productIndex + 1) / 12) + 1
     }
     return 1
-  }
-
-  const handleGoToShop = () => {
-    const pageNumber = calculatePageNumber()
-    navigate(`/${currentProductCat}?page=${pageNumber}`)
-    // navigate('/products');
   }
 
   const updateRecentlyViewedInLocalStorage = () => {
@@ -283,7 +261,6 @@ const SingleProduct = () => {
     }
   }
 
-
   const fetchRelatedProducts = async () => {
     try {
       const res = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/${id}/related`)
@@ -293,14 +270,11 @@ const SingleProduct = () => {
     }
   }
 
-
   const ProductCard = ({ product }) => {
-    // Add null check for product
     if (!product) {
-      return null; // Or return a placeholder/loading state
+      return null;
     }
   
-    // Destructure with default values to prevent null/undefined errors
     const { 
       name = '',
       price = 0,
@@ -329,7 +303,14 @@ const SingleProduct = () => {
               ₦ {Number(price).toLocaleString()}.00
             </p>
             <div className='mt-auto'>
-            <Link to={`/product/${product._id}/${product.slug}`}  className='btn btn-dark btn-sm w-100' style={{ backgroundColor: 'black', borderColor: 'black' }}>View Product</Link>
+            <Link 
+              to={`/product/${product.slug}/${product._id}`}
+              state={{ from: window.location.pathname + window.location.search }} // Include query params
+              className='btn btn-dark btn-sm w-100' 
+              style={{ backgroundColor: 'black', borderColor: 'black' }}
+            >
+              View Product
+            </Link>
             </div>
           </div>
         </div>
@@ -337,11 +318,9 @@ const SingleProduct = () => {
     );
   };
 
-
   const ProductSection = ({ title, products }) => {
-    // Add null check for products array
     if (!products || !Array.isArray(products)) {
-      return null; // Or return a placeholder/loading state
+      return null;
     }
   
     return (
@@ -407,7 +386,7 @@ const SingleProduct = () => {
 
   return (
     <>
-       {seoData && (
+      {seoData && (
         <Helmet>
           <title>{seoData.title}</title>
           <meta name="description" content={seoData.description} />
@@ -436,11 +415,10 @@ const SingleProduct = () => {
         </Helmet>
       )}
 
-      {/*================================================================ header ==============================================*/}
-      <div class='container-fluid shop-section'>
-        <div class='py-5 mt-5'></div>
+      <div className='container-fluid shop-section'>
+        <div className='py-5 mt-5'></div>
       </div>
-      <section class='mt-0' id='product' style={{ backgroundColor: '#f1f1f2' }}>
+      <section className='mt-0' id='product' style={{ backgroundColor: '#f1f1f2' }}>
         {isLoading ? (
           <>
             <div className='container mt-4'>
@@ -452,10 +430,11 @@ const SingleProduct = () => {
                 Back
               </button>
             </div>
-            <div class='container py-5 mb-'>
-              <div class='row border-0 '>
-                <div class='col-lg-8 '>
-                  {/* <div className="container"> */}
+
+            {/* Rest of your existing JSX remains exactly the same */}
+            <div className='container py-5 mb-'>
+              <div className='row border-0 '>
+                <div className='col-lg-8 '>
                   <div className='row g-0  '>
                     <div className='col-2' style={{ backgroundColor: 'white' }}>
                       <div className='card border-0'>
@@ -509,7 +488,6 @@ const SingleProduct = () => {
                     </div>
                     <div className='col-md-10'>
                       <div className='card border-0'>
-                        {/* #fff  */}
                         <div className='gall'>
                           <Swiper
                             style={{
@@ -517,7 +495,6 @@ const SingleProduct = () => {
                               '--swiper-pagination-color': '#080808'
                             }}
                             spaceBetween={0}
-                            // effect={'fade'}
                             navigation={true}
                             loop={true}
                             pagination={{
@@ -541,11 +518,10 @@ const SingleProduct = () => {
                             {image.map(item => (
                               <div key={item.id}>
                                 <SwiperSlide className='border-0'>
-                                  {/* <img  src={item.url} className='img-fluid' style={{height:"400px", width:"770px", objectFit:"cover"}} /> */}
                                   <div className='text-center'>
                                     <img
                                       alt=''
-                                      class='img-fluid'
+                                      className='img-fluid'
                                       src={item.url}
                                     ></img>
                                   </div>
@@ -554,14 +530,13 @@ const SingleProduct = () => {
                             ))}
                           </Swiper>
                         </div>
-                        {/* </div> */}
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class='col-lg-4 mb-5'>
-                  <div class=''>
+                <div className='col-lg-4 mb-5'>
+                  <div className=''>
                     <div className='container' style={{ display: 'none' }}>
                       <h1>{data.name}</h1>
                       <img src={product.images[0].url} alt={data.name} />
@@ -574,13 +549,13 @@ const SingleProduct = () => {
                     </div>
                     <h4 className='fw-bold'>{data.name}</h4>
                     <hr />
-                    <div class=' mt-0'>
+                    <div className=' mt-0'>
                       <p className=''>
                         <span className='text-dark fw-bold pe-2'>Brand:</span>
                         {data.brand}
                       </p>
                     </div>
-                    <div class='d-flex'>
+                    <div className='d-flex'>
                       <h4 className='mt-'>
                         Total: ₦ {Number(data.price).toLocaleString()}.00
                       </h4>
@@ -593,21 +568,21 @@ const SingleProduct = () => {
                       {data.quantity <= '0' ? 'Out of Stock' : 'In Stock'}
                     </p>
                     <p>shipping from ₦ 2,500 and Above </p>
-                    <ul class='list-unstyled d-flex mt-3'>
+                    <ul className='list-unstyled d-flex mt-3'>
                       <li>
-                        <i class='fa fa-star' style={{ color: '#f4be1d' }}></i>
+                        <i className='fa fa-star' style={{ color: '#f4be1d' }}></i>
                       </li>
                       <li>
-                        <i class='fa fa-star' style={{ color: '#f4be1d' }}></i>
+                        <i className='fa fa-star' style={{ color: '#f4be1d' }}></i>
                       </li>
                       <li>
-                        <i class='fa fa-star' style={{ color: '#f4be1d' }}></i>
+                        <i className='fa fa-star' style={{ color: '#f4be1d' }}></i>
                       </li>
                       <li>
-                        <i class='fa fa-star' style={{ color: '#f4be1d' }}></i>
+                        <i className='fa fa-star' style={{ color: '#f4be1d' }}></i>
                       </li>
                       <li>
-                        <i class='fa fa-star' style={{ color: '#f4be1d' }}></i>
+                        <i className='fa fa-star' style={{ color: '#f4be1d' }}></i>
                       </li>
                     </ul>
                     <div className='row justify-content-md-end mt-3'>
@@ -628,12 +603,12 @@ const SingleProduct = () => {
                             <div className='d-flex justify-content-md-end mt-3 '>
                               <Link to={`/product/${id}/update`}>
                                 <i
-                                  class='bi bi-pencil-square text-warning fs-3 me-4'
+                                  className='bi bi-pencil-square text-warning fs-3 me-4'
                                   style={{ cursor: 'pointer' }}
                                 ></i>
                               </Link>
                               <i
-                                class='bi bi-trash3 text-danger fs-3'
+                                className='bi bi-trash3 text-danger fs-3'
                                 style={{ cursor: 'pointer' }}
                                 onClick={handleDelete}
                               ></i>
@@ -645,7 +620,7 @@ const SingleProduct = () => {
                       </div>
                       <h6 className='mt-3 fw-bold'>PROMOTIONS</h6>
                       <div className='d-flex mt-2'>
-                        <i class='bi bi-telephone-fill fs-3'></i>
+                        <i className='bi bi-telephone-fill fs-3'></i>
                         <p className='text-dark mt-2 ms-4'>
                           Call{' '}
                           <a
@@ -667,6 +642,7 @@ const SingleProduct = () => {
                 </div>
               </div>
 
+              {/* Rest of your existing product details JSX remains exactly the same */}
               {data.category !== 'Computer' ? (
                 <div className='container mt-5  mb-5'>
                   <div className='row '>
@@ -675,7 +651,7 @@ const SingleProduct = () => {
                       <hr className='text-danger' />
                       <div className='border-0'>
                         <div
-                          class='description mt-2 mb-5 p-'
+                          className='description mt-2 mb-5 p-'
                           dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(data.description)
                           }}
@@ -699,7 +675,7 @@ const SingleProduct = () => {
                           style={{ backgroundColor: '#f1f1f2' }}
                         >
                           <div
-                            class='description mt-2 mb-5'
+                            className='description mt-2 mb-5'
                             dangerouslySetInnerHTML={{
                               __html: DOMPurify.sanitize(data.description)
                             }}
@@ -708,13 +684,12 @@ const SingleProduct = () => {
                       </div>
                     </div>
                   </div>
-                  {/*  */}
                   <div>
                     {computer.map(com => (
                       <div key={com.id}>
                         <h4 className='fw-bold mb-3'>Description</h4>
                         <table
-                          class='table table-bordered'
+                          className='table table-bordered'
                           style={{ width: '100%' }}
                         >
                           <thead>
@@ -865,4 +840,5 @@ const SingleProduct = () => {
     </>
   )
 }
+
 export default SingleProduct

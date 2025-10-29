@@ -318,6 +318,7 @@ const NetworkDevices = () => {
                           <Link
                             className='text-decoration-none text-dark'
                             to={`/product/${product.slug}/${product._id}?fromPage=${currentPage}`}
+                            state={{ from: window.location.pathname }}
                           >
                             <div className='text-center take'>
                               <LazyLoadImage
