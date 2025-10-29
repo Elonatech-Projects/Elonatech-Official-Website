@@ -1053,7 +1053,7 @@ const Main = () => {
                   <h5 className="fw-normal mt-2 text-truncate" title={featuredProduct.name}>
                     {featuredProduct.name}
                   </h5>
-                  <p className="small mb-1">Product</p>
+                  <p className="small mb-1">Products</p>
                   <div className="stars mb-1" style={{ color: '#f6b01e' }}>
                     {[...Array(5)].map((_, i) => (
                       <i key={i} className="bi bi-star-fill"></i>
@@ -1124,8 +1124,8 @@ const Main = () => {
                           ? 'POS'
                           : product.category === 'Network'
                           ? 'Network Device'
-                          : product.category === 'Shop'
-                          ? 'Shop'
+                          : product.category === 'Printer'
+                          ? 'Printer'
                           : product.category}
                       </p>
                       <div className='stars mb-1' style={{ color: '#f6b01e' }}>

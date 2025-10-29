@@ -2076,7 +2076,7 @@ const Navbar = () => {
                     className='productss-items-active dropdown-item  mt-1 p-2 dismiss-nav-man'
                     data-bs-dismiss='offcanvas'
                   >
-                    Shop
+                    Products
                   </li>
                 </Link>
                 <Link

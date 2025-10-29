@@ -13,10 +13,26 @@ import companyProfilePdf from './Our-Company-Profile_Elonatech.pdf';
 import { Helmet } from 'react-helmet-async';
 
 const Company = () => {
+  const ExperienceYears = () => {
+   const startYear = 2010; 
+   const startMonth = 3;  
+   const startDate = new Date(startYear, startMonth);
+   const now = new Date();
+
+   let years = now.getFullYear() - startDate.getFullYear();
+   const monthDiff = now.getMonth() - startDate.getMonth();
+
+   if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < startDate.getDate())) {
+    years--;
+   }
+
+    return years; 
+  };
+  
   return (
     <>
       <Helmet>
-        <title>WHO WE ARE - Leading IT Solutions Provider with 13+ Years of Expertise</title>
+        <title>WHO WE ARE - Leading IT Solutions Provider with {`${ExperienceYears()}`} Years of Expertise</title>
         <meta
 
           name="description"
