@@ -248,7 +248,7 @@ const SingleProduct = () => {
   const handleGoToShop = () => {
     // const pageNumber = calculatePageNumber()
     // navigate(`/${currentProductCat}?page=${pageNumber}`)
-    navigate('/shop');
+    navigate('/products');
   }
 
   const updateRecentlyViewedInLocalStorage = () => {

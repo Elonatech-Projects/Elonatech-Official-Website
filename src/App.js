@@ -218,7 +218,7 @@ const router = createBrowserRouter([
       element:<AppDevelopment/>
     },
     {
-      path:'/shop',
+      path:'/products',
       element:<Shop/>
     },
     // team ==============================

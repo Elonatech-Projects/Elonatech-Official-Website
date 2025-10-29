@@ -2071,7 +2071,7 @@ const Navbar = () => {
             </a>
             <ul className='dropdown-menu border-0 drop-menu text-center p-4'>
               <ul className='productss-items list-unstyled'>
-                <Link to={'/shop'} className='text-decoration-none text-dark'>
+                <Link to={'/products'} className='text-decoration-none text-dark'>
                   <li
                     className='productss-items-active dropdown-item  mt-1 p-2 dismiss-nav-man'
                     data-bs-dismiss='offcanvas'
