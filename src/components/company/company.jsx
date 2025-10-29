@@ -61,7 +61,7 @@ const Company = () => {
             <div className="col-lg-6">
               <div className="section-title position-relative pb-3 mb-">
                 <h2 className="mt-3">
-                  The Best Innovative IT Solutions Provider with Over 13 Years
+                  The Best Innovative IT Solutions Provider with Over {`${ExperienceYears()}`} Years
                   of Experience
                 </h2>
               </div>
