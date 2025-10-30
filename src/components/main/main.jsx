@@ -57,10 +57,14 @@ const Main = () => {
               (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
             )[0]
           })
+          console.log('latest', latest);
+          
 
           setLatestProducts(latest)
 
-          const computerProducts = productsByCategory['Computer']
+          const computerProducts = productsByCategory[' ']
+          console.log('computer', computerProducts);
+          
           if (computerProducts && computerProducts.length >= 2) {
             setFeaturedProduct(computerProducts[1])
           }
