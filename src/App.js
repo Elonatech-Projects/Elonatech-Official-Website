@@ -803,7 +803,7 @@ const App = () => {
     // Log visit to your backend
     const logVisit = async () => {
       try {
-        await axios.post('/api/v1/visitors/log');
+        await axios.post('https://backend-api-mbln.onrender.com/api/v1/visitors/log');
       } catch (error) {
         console.error('Error logging visitor:', error);
       }

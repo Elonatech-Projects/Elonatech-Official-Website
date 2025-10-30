@@ -47,7 +47,7 @@ const Shop = () => {
       try {
         const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/filter/all`)
         const products = response.data.data.reverse()
-        console.log(products)
+        // console.log(products)
         setData(products)
         setRecords(products)
         setIsLoading(false)

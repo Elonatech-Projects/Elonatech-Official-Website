@@ -12,11 +12,11 @@ const Career = () => {
       link: '/graphic-career'
     },
     {
-      title: 'Full Stack Web Developer',
+      title: 'Full Stack Software Developer',
       description:
         "Must have at least 2 years' work experience with proof of Web Development.",
       img: 'https://res.cloudinary.com/elonatech/image/upload/v1709662773/careerPage/web-development_psuko3.png',
-      link: '/web-career'
+        link: '/web-career'
     },
     {
       title: 'Digital Marketer',
@@ -32,7 +32,7 @@ const Career = () => {
       link: '/animation-career'
     },
     {
-      title: 'Systems/Network Engineer',
+      title: 'Tech Support Personnel',
       description:
         "Minimum of 2 years' experience in maintenance of computer hardware, software systems, and supporting network.",
       img: 'https://res.cloudinary.com/elonatech/image/upload/v1709662770/careerPage/ux-design_kjglok.png',
@@ -54,7 +54,7 @@ const Career = () => {
         <meta
           name='description'
           content='Build a Career With Us
-In our bid to promote operational excellence and lead in the delivery of IT solutions across Nigeria and beyond, our pursuit for the best hands is the cornerstone of our recruitment policy. Elonatech seeks people who are self-driven, strong-willed, result-oriented and performance-driven, to find brighter, smarter and innovative solutions to problems and ignite our world. '
+          In our bid to promote operational excellence and lead in the delivery of IT solutions across Nigeria and beyond, our pursuit for the best hands is the cornerstone of our recruitment policy. Elonatech seeks people who are self-driven, strong-willed, result-oriented and performance-driven, to find brighter, smarter and innovative solutions to problems and ignite our world. '
         />
         <link rel='canonical' href='https://elonatech.com.ng/career' />
       </Helmet>
@@ -120,9 +120,7 @@ In our bid to promote operational excellence and lead in the delivery of IT solu
             Role Applying For?
           </h4>
           <p className='container'>
-            We develop an individual integrated solution for your business and
-            select a unique set of services for it, combining them with a single
-            strategy and goal
+            We believe in building a team of passionate innovators who embody excellence, creativity, and a strong sense of responsibility.
           </p>
         </div>
         <div className='container'>

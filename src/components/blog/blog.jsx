@@ -26,7 +26,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASEURL}/api/v1/blog/`)
+        const response = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/blog/`)
         setData(response.data.getAllBlogs)
         setIsLoading(true)
       } catch (error) {
@@ -44,7 +44,7 @@ const Blog = () => {
         email
       }
       const mail = await axios.post(
-        `${BASEURL}/api/v1/email/mailchimp`,
+        `https://backend-api-mbln.onrender.com/api/v1/email/mailchimp`,
         newData,
         { headers: { 'Content-Type': 'Application/json' } }
       )

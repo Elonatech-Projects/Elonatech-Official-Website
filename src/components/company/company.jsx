@@ -1,4 +1,3 @@
-
 import about from './image/about.jpg';
 import test from './image/razzer.jpg';
 import test2 from './image/wallpaper-design-featured-image-1.jpg';
@@ -14,29 +13,31 @@ import { Helmet } from 'react-helmet-async';
 
 const Company = () => {
   const ExperienceYears = () => {
-   const startYear = 2010; 
-   const startMonth = 3;  
-   const startDate = new Date(startYear, startMonth);
-   const now = new Date();
+  const startYear = 2010; // The year you started
+  const startMonth = 3;   // April (0 = January)
+  const startDate = new Date(startYear, startMonth);
+  const now = new Date();
 
-   let years = now.getFullYear() - startDate.getFullYear();
-   const monthDiff = now.getMonth() - startDate.getMonth();
+  let years = now.getFullYear() - startDate.getFullYear();
+  const monthDiff = now.getMonth() - startDate.getMonth();
 
-   if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < startDate.getDate())) {
+  // If the current month is before April, reduce the count by 1
+  if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < startDate.getDate())) {
     years--;
-   }
+  }
 
-    return years; 
-  };
-  
+  return years; // ✅ You must return this value
+};
+
+
   return (
     <>
       <Helmet>
-        <title>WHO WE ARE - Leading IT Solutions Provider with {`${ExperienceYears()}`} Years of Expertise</title>
+        <title>Who We Are | Elonatech - {`${ExperienceYears()}`}+ Years of Expertise</title>
         <meta
 
           name="description"
-          content="A diversified company in pursuit of excellence in ‘IT’. The Best Innovative IT Solutions Provider with Over 13 Years of Experience. Excellence, Team Work, Integrity, Professionalism. Our Core Expertise focuses on Sales and Supply, Web Design and Development, Network Admin/Implementation, Access Control, PBX & Surveillance (CCTV), Hardware Engineering, Software Engineering, Digital Marketing, Graphics & Brand Identity, Livestreaming and Videoconferencing, Video Editing & Motion Graphics, Training, Consulting & Retainer Partnership, etc. that will enable you and your clients maximize technology in bringing about the desired results, and access to a wide array of office equipment."
+          content="A diversified company in pursuit of excellence in ‘IT’. The Best Innovative IT Solutions Provider with Over {ExperienceYears()} Years of Experience. Excellence, Team Work, Integrity, Professionalism. Our Core Expertise focuses on Sales and Supply, Web Design and Development, Network Admin/Implementation, Access Control, PBX & Surveillance (CCTV), Hardware Engineering, Software Engineering, Digital Marketing, Graphics & Brand Identity, Livestreaming and Videoconferencing, Video Editing & Motion Graphics, Training, Consulting & Retainer Partnership, etc. that will enable you and your clients maximize technology in bringing about the desired results, and access to a wide array of office equipment."
         />
         <link rel="canonical" href="https://elonatech.com.ng/who-we-are" />
       </Helmet>
@@ -61,13 +62,11 @@ const Company = () => {
             <div className="col-lg-6">
               <div className="section-title position-relative pb-3 mb-">
                 <h2 className="mt-3">
-                  The Best Innovative IT Solutions Provider with Over {`${ExperienceYears()}`} Years
-                  of Experience
+                  The Best Innovative IT Solutions Provider with Over {ExperienceYears()} Years of Experience
                 </h2>
               </div>
               <p className="mb-4">
-                  At Elonatech, we understand the growing demand for reliable, high-quality <strong>IT products and services</strong> in today’s fast-evolving business world. Managing technology effectively is no longer a do-it-yourself task;
-                  it requires the right expertise, dependable tools, and innovative solutions. At Elonatech, we don’t just provide technology; <strong>we transform it into your competitive advantage</strong>
+                At Elonatech, we understand the growing demand for reliable, high-quality <strong>IT products and services</strong> in today’s fast-evolving business world. Managing technology effectively is no longer a do-it-yourself task; it requires the right expertise, dependable tools, and innovative solutions. At Elonatech, we don’t just provide technology; <strong>we transform it into your competitive advantage</strong>
               </p>
               <div class='row g-0 mb-3'>
                 <div class='col-sm-6 wow zoomIn' data-wow-delay='0.2s'>
@@ -197,7 +196,7 @@ const Company = () => {
                 style={{ textAlign: 'justify' }}
                 data-wow-delay='0.2s'
               >
-                 At Elonatech, we design our services for top-tier corporate clients and forward-thinking enterprises that demand efficiency, precision, and long-term value. Our structure, strategy, and service delivery are built to exceed expectations, delivering solutions that are affordable, scalable, and performance-driven. <br /> We believe technology should not just support your business; it should elevate it. That is why we continuously redefine IT excellence, ensuring every solution we craft adds measurable value to your operations and a competitive edge in your industry. <br /> In today’s complex digital ecosystem, a versatile and visionary IT partner is essential. Elonatech stands ready, not just to solve problems but to redefine possibilities.
+                At Elonatech, we design our services for top-tier corporate clients and forward-thinking enterprises that demand efficiency, precision, and long-term value. Our structure, strategy, and service delivery are built to exceed expectations, delivering solutions that are affordable, scalable, and performance-driven. <br /> We believe technology should not just support your business; it should elevate it. That is why we continuously redefine IT excellence, ensuring every solution we craft adds measurable value to your operations and a competitive edge in your industry. <br /> In today’s complex digital ecosystem, a versatile and visionary IT partner is essential. Elonatech stands ready, not just to solve problems but to redefine possibilities.
               </p>
             </div>
           </div>
@@ -213,19 +212,18 @@ const Company = () => {
                 style={{ textAlign: 'justify' }}
                 data-wow-delay='0.2s'
               >
-                Our core expertise spans across several key areas including sales and supply of computers, accessories, and enterprise equipment that power business productivity. We specialize in web-based and mobile apps design and development, creating dynamic, user-focused websites and scalable platforms built with robust, modern technologies. Our networking and infrastructure services cover the design, deployment, and administration of secure and efficient IT systems that ensure seamless connectivity. <br />
+                Our core expertise spans across several key areas including <strong>sales and supply of computers,</strong> accessories, and enterprise equipment that power business productivity. We specialize in <strong>web-based and mobile apps design and development,</strong> creating dynamic, user-focused websites and scalable platforms built with robust, modern technologies. Our <strong>networking and infrastructure services</strong> cover the design, deployment, and administration of secure and efficient IT systems that ensure seamless connectivity. <br />
                 We also provide <strong>access control, PBX, and surveillance (CCTV)</strong> installations, alongside <strong>hardware and software engineering services</strong> designed to guarantee reliability and superior functionality. <br />
                 In addition, Elonatech delivers <strong>digital marketing, branding, graphics design, video editing, motion graphics, and live streaming</strong> services that help businesses communicate effectively and stand out in a digital world. Through our <strong>training, consulting, and retainer partnership programs</strong>, we empower organizations to maximize technology, build capacity, and drive sustainable growth
-
               </p>
-              <p
+              {/* <p
                 className='wow fadeInUp'
                 style={{ textAlign: 'justify' }}
                 data-wow-delay='0.2s'
               >
                 In today’s complex and diverse data centre environments, a
                 functional and diversified IT solutions provider is inevitable.
-              </p>
+              </p> */}
             </div>
           </div>
           <div className='col-md-6'>

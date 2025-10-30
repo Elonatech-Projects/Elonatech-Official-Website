@@ -81,7 +81,7 @@ const SingleProduct = () => {
   
   const useScrollResetNavigation = () => {
     const navigate = useNavigate()
-    const location = useLocation()
+    // const location = useLocation()
     const isNavigatingRef = useRef(false)
 
     const scrollToTop = useCallback(() => {
@@ -178,6 +178,7 @@ const SingleProduct = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/${id}`)
+        console.log('single-id-product', res.data.product);
         setData(res.data.product)
         setImage(res.data.product.images)
         setCategory(res.data.product.category)
@@ -188,6 +189,8 @@ const SingleProduct = () => {
         updateRecentlyViewedInLocalStorage()
 
         const nextRes = await axios.get(`https://backend-api-mbln.onrender.com/api/v1/product/${res.data.product._id}/next`);
+        console.log('next-res', nextRes);
+        
         if (nextRes.data.nextProduct) {
           setNextProductId(nextRes.data.nextProduct._id);
           setNextProductSlug(nextRes.data.nextProduct.slug);
@@ -197,7 +200,7 @@ const SingleProduct = () => {
         }
 
         await fetchAllProductsInCategory()
-        console.log('allProductsInCategory:', allProductsInCategory);
+        // console.log('allProductsInCategory:', allProductsInCategory);
         await fetchRelatedProducts()
         await fetchRecentlyViewedProducts()
 
@@ -214,7 +217,7 @@ const SingleProduct = () => {
       .then(response => response.json())
       .then(data => {
         setAllProductsInCategory(data.data.reverse());
-        console.log('allProductsInCategory:', allProductsInCategory);
+        // console.log('allProductsInCategory:', allProductsInCategory);
       })
       .catch(error => {
         console.error('Error fetching products in the same category:', error);

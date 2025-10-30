@@ -1,4 +1,3 @@
-
 import './css/team.css';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -9,129 +8,122 @@ import { Helmet } from 'react-helmet-async';
 const Team = () => {
     return (
 <>
-<Helmet>
-       <title>Our Team - Tech Solution, Digital </title>
-       <meta name="description" content=" 
-       The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world
-       Leadership Team
-       The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world. Our people are passionate about technology, business, and customer relation
-       " />
-       <link rel="canonical" href="https://elonatech.com.ng/our-team" />
-</Helmet>
+    <Helmet>
+        <title>Our Team - Tech Solution, Digital </title>
+        <meta name="description" content=" 
+        The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world
+        Leadership Team
+        The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world. Our people are passionate about technology, business, and customer relation
+        " />
+        <link rel="canonical" href="https://elonatech.com.ng/our-team" />
+    </Helmet>
 
-{/*=========================================================== Header ===================================================*/}
-<div class="container-fluid our-team-section">
-  <div class="text-content">
-    <h2>Our Team</h2>
-    <h5>We Are Passionate About Technology, Business, And Customer Relation</h5>
-    <p class="lead">The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world</p>
-  </div>
-</div>
-
-{/*================================================================= attribute ============================================*/}
-<div className="container mt-5">
-    <p className='fs-1 fw-bolder' style={{color:"#34548c"}}>Excellence at Work for Over a Decade</p>
-    <div className="row">
-        <div className="col-md-12">
-            <p className='' style={{textAlign:"justify"}}>
-            Elonatech Nigeria Limited has been in operation for several years as a Computer and 
-            Allied products dealer/supplier until much recently in April 2010, 
-            where it commenced operations as a One-stop IT Solution Outfit.
-            <br />
-            <br />
-            Our Company’s logistical services are designed for the top-of-the-market corporate clientele.
-            We have continued to expand our range of services around the client: his problems, his needs, and his desires; 
-            we continue to innovate and sustain existing services while creating and maintaining new services to meet the needs of the 
-            increasingly sophisticated corporate clientele. and homes, as well as providing online consultation to client’s most pressing problems.
-            </p>
-        </div>
+    {/*=========================================================== Header ===================================================*/}
+    <div class="container-fluid our-team-section">
+    <div class="text-content">
+        <h2>Our Team</h2>
+        <h5>We Are Passionate About Technology, Business, And Customer Relation</h5>
+        <p class="lead">The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world</p>
     </div>
-</div>
-{/*=========================================================== attribute  2 ================================================*/}
-<div className="container mt-5">
-    <div className="row justify-content-center">
-        {/* 'F' Section */}
-        <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
-            <div className="d-flex align-items-center">
-                <div className="brci">
-                    <h1 className="focus-letter">F</h1>
-                </div>
-                <h5 className="fw-bolder ms-3">Flexible</h5>
-            </div>
-        </div>
+    </div>
 
-        {/* 'O' Section */}
-        <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
-            <div className="d-flex align-items-center">
-                <div className="brci">
-                    <h1 className="focus-letter">O</h1>
-                </div>
-                <h5 className="fw-bolder ms-3">Optimistic</h5>
-            </div>
-        </div>
-
-        {/* 'C' Section */}
-        <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
-            <div className="d-flex align-items-center">
-                <div className="brci">
-                    <h1 className="focus-letter">C</h1>
-                </div>
-                <h5 className="fw-bolder ms-3">Committed</h5>
-            </div>
-        </div>
-
-        {/* 'U' Section */}
-        <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
-            <div className="d-flex align-items-center">
-                <div className="brci">
-                    <h1 className="focus-letter">U</h1>
-                </div>
-                <h5 className="fw-bolder ms-3">Unparalleled</h5>
-            </div>
-        </div>
-
-        {/* 'S' Section */}
-        <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
-            <div className="d-flex align-items-center">
-                <div className="brci">
-                    <h1 className="focus-letter">S</h1>
-                </div>
-                <h5 className="fw-bolder ms-3">Sustainable</h5>
+    {/*================================================================= attribute ============================================*/}
+    <div className="container mt-5">
+        <p className='fs-1 fw-bolder' style={{color:"#34548c"}}>Over a Decade and a Half of Excellence in Innovation</p>
+        <div className="row">
+            <div className="col-md-12">
+                <p className='' style={{textAlign:"justify"}}>
+                    Elonatech Nigeria Limited began operations several years ago as a supplier of computer and allied products. In April 2010, the company evolved into a <strong>one-stop IT solutions outfit</strong> and was officially incorporated on <strong>May 3rd, 2017 (RC 1410636)</strong>. Since then, Elonatech has grown into a trusted technology partner to organizations across Nigeria, bridging the gap between people, process, and performance. <br />
+                    Our services are tailored for top-tier corporate clients, focused on innovation, reliability, and long-term value. At Elonatech, we constantly evolve to meet the dynamic needs of a technology-driven world.
+                </p>
             </div>
         </div>
     </div>
-</div>
+    {/*=========================================================== attribute  2 ================================================*/}
+    <div className="container mt-5">
+        <div className="row justify-content-center">
+            {/* 'F' Section */}
+            <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
+                <div className="d-flex align-items-center">
+                    <div className="brci">
+                        <h1 className="focus-letter">F</h1>
+                    </div>
+                    <h5 className="fw-bolder ms-3">Flexible</h5>
+                </div>
+            </div>
 
-{/*============================================================= worthy ===================================================*/}
-<div className="container mt-5">
-    <div className="row g-5">
-    <div className="col-md-6">
-        <div className=""> 
-        <p className='fs-3 fw-bold' style={{color:"#34548c"}}>Team Members</p> 
-        <p className='' style={{textAlign:"justify"}}>
-        The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world.
-        Our people are passionate about technology, business, and customer relation. 
-        They strive for excellence and have the strongest belief in themselves and their potentials, which in turn brings about the desired result in the services rendered. 
-        When your mission is to be better and faster, you need the best people driving your vision. 
-        Those who can create focused marketing strategies that align with business goals, and infuse their creativity into groundbreaking campaigns.
-        </p>
+            {/* 'O' Section */}
+            <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
+                <div className="d-flex align-items-center">
+                    <div className="brci">
+                        <h1 className="focus-letter">O</h1>
+                    </div>
+                    <h5 className="fw-bolder ms-3">Optimistic</h5>
+                </div>
+            </div>
+
+            {/* 'C' Section */}
+            <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
+                <div className="d-flex align-items-center">
+                    <div className="brci">
+                        <h1 className="focus-letter">C</h1>
+                    </div>
+                    <h5 className="fw-bolder ms-3">Committed</h5>
+                </div>
+            </div>
+
+            {/* 'U' Section */}
+            <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
+                <div className="d-flex align-items-center">
+                    <div className="brci">
+                        <h1 className="focus-letter">U</h1>
+                    </div>
+                    <h5 className="fw-bolder ms-3">Unparalleled</h5>
+                </div>
+            </div>
+
+            {/* 'S' Section */}
+            <div className="col-12 col-md-2 d-flex flex-md-column align-items-center mb-3 mt-4">
+                <div className="d-flex align-items-center">
+                    <div className="brci">
+                        <h1 className="focus-letter">S</h1>
+                    </div>
+                    <h5 className="fw-bolder ms-3">Sustainable</h5>
+                </div>
+            </div>
         </div>
-        </div>
-    <div className="col-md-6">
-        <div className="">
-        <p className='fs-3 fw-bold text-end' style={{color:"#34548c"}}>Our Passion</p> 
-        <p className='' style={{textAlign:"justify"}}>
-            We have a passion for our clients, results and the solutions we provide. 
-            Our team possess a pragmatic drive for action that runs through the week, each working day, and doesn’t let up. 
-            We rally clients with our infectious energy, to make change stick. And we never do it alone. 
-            We support and are supported to develop our own personal result(s) stories. We train, and get trained to further equip ourselves,
-             so as to be abreast of imminent IT challenges. We work hard, but we don’t take ourselves too seriously. We enjoy what we do and we laugh a lot… most often at ourselves.
-            It feels different to work with us.
-        </p>
-        </div>
-       </div>
     </div>
-</div>
+
+    {/*============================================================= worthy ===================================================*/}
+    <div className="container mt-5">
+        <div className="row g-5">
+            <div className="col-md-6">
+                <div className=""> 
+                <p className='fs-3 fw-bold' style={{color:"#34548c"}}>Team Members</p> 
+                <p className='' style={{textAlign:"justify"}}>
+                The Elonatech team consists of young, talented, educated, proud and highly motivated people that brings positive changes to our technological advancing world.
+                Our people are passionate about technology, business, and customer relation. 
+                They strive for excellence and have the strongest belief in themselves and their potentials, which in turn brings about the desired result in the services rendered. 
+                When your mission is to be better and faster, you need the best people driving your vision. 
+                Those who can create focused marketing strategies that align with business goals, and infuse their creativity into groundbreaking campaigns.
+                </p>
+                </div>
+            </div>
+            <div className="col-md-6">
+                <div className="">
+                <p className='fs-3 fw-bold text-end' style={{color:"#34548c"}}>Our Passion</p> 
+                <p className='' style={{textAlign:"justify"}}>
+                    We have a passion for our clients, results and the solutions we provide. 
+                    Our team possess a pragmatic drive for action that runs through the week, each working day, and doesn’t let up. 
+                    We rally clients with our infectious energy, to make change stick. And we never do it alone. 
+                    We support and are supported to develop our own personal result(s) stories. We train, and get trained to further equip ourselves,
+                    so as to be abreast of imminent IT challenges. We work hard, but we don’t take ourselves too seriously. We enjoy what we do and we laugh a lot… most often at ourselves.
+                    It feels different to work with us.
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
 {/* ========================================================== team members ============================================== */}
 <div className="container mt-5 mb-5">
 <div class="text-center mx-auto mt-5 wow fadeInUp" data-wow-delay="0.1s" style={{minWidth:"20px"}}>

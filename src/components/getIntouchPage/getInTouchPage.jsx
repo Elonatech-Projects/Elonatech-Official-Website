@@ -55,7 +55,7 @@ const GetInTouchPage = () => {
             <div className='card border-0'>
                 <h2 className='fw-bold'>Get in touch with us today.</h2>
                 <h6 className='mt-2'>We’d love to hear from you.</h6>
-                <p className=''>Send us a message and we’ll respond as soon as possible.</p>
+                <p className=''>Scan to connect with us on Social Media</p>
 
                 <div class="grid-container">
                   <div><img src="https://res.cloudinary.com/elonatech/image/upload/v1734539524/X_Twitter_bmsqus.png" alt="Twitter QR Code" width="100px" />Twitter</div>
